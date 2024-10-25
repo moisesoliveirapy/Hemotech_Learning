@@ -10,6 +10,8 @@ body {}
     object-fit: cover;
     border-radius: 20px;
   }
-.cards {
+.card img{
+    width: 80px;
+    height: 80px;
     
 }
