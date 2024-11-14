@@ -244,3 +244,49 @@ background-color: silver;
     }
   }
   
+  .login{
+    width: 50%;
+    margin: auto;
+  }
+  .login-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-logo img {
+    margin-top: 50px;
+    width: 220px;
+  }
+  .login h3{
+    text-align: center;
+  }
+  .form {
+    margin-top:80px ;
+    background-color: white;
+  }
+  .barra {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .form hr {
+    width: 70%;
+
+  }
+  #inicial {
+    background-color: rgb(240, 239, 239);
+  }
+.button-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+  }
+
+  .button-nav button{
+    width: 50%;
+  }
+/*   .form-control {
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+  } */
