@@ -1,18 +1,17 @@
 <?php include "config/cabecalho.php" ?>
 <script>
+    function logar() {
+        var login = document.getElementById("Login").value
+        var senha = document.getElementById("Senha").value
 
-        function logar() {
-            var login = document.getElementById("Login").value
-            var senha = document.getElementById("Senha").value
-
-            if (login == "admin" && senha == "12345") {
-                alert("Acesso permitido")
-                location.href = "home.php";
-            } else {
-                alert("Senha Incorreta");
-            }
+        if (login == "admin" && senha == "12345") {
+            alert("Acesso permitido")
+            location.href = "home.php";
+        } else {
+            alert("Senha Incorreta");
         }
-    </script>
+    }
+</script>
 
 
 <body id="inicial">
