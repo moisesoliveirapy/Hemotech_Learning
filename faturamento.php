@@ -5,7 +5,7 @@
 $bd = new SQLite3("config/materiais.db");
 
 // Consulta os materiais no banco de dados
-$sql = "SELECT * FROM materiais where categoria = 'Enfermagem'";
+$sql = "SELECT * FROM materiais where categoria = 'Faturamento'";
 $materiais = $bd->query($sql);
 ?>
 

@@ -1,9 +1,6 @@
 <?php include "config/cabecalho.php" ?>
 
 <body>
-  <header>
-   <? include "config/navegacao.php" ?>
-  </header>
 
   <main>
     <div class="carrousel p-3 mb-2 text-white">
