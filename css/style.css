@@ -314,11 +314,14 @@ body {
 
 .form {
   margin: 0 auto;
-  max-width: 500px; /* Define uma largura máxima para o formulário */
+  max-width: 500px;
+  /* Define uma largura máxima para o formulário */
   background-color: white;
-  padding: 60px 30px; /* Reduz o padding para economizar espaço */
+  padding: 60px 30px;
+  /* Reduz o padding para economizar espaço */
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra leve */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Adiciona uma sombra leve */
 }
 
 .form h3 {
@@ -363,7 +366,8 @@ body {
   width: 100%;
   padding: 0.75rem;
   font-size: 1rem;
-  background-color: #b46564; /* Cor de fundo para o botão */
+  background-color: #b46564;
+  /* Cor de fundo para o botão */
   color: white;
   border: none;
   border-radius: 5px;

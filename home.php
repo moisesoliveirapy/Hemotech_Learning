@@ -2,41 +2,7 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg bg-body-primary">
-      <div class="container-fluid">
-        <a href="home.php"><img class="logo" src="img/csb_completo.svg" alt="Logo" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link active" href="home.php">Início</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Cursos externos</a></li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Categorias</a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="enfermagem.php">Enfermagem</a></li>
-                <li><a class="dropdown-item" href="#">Faturamento</a></li>
-                <li><a class="dropdown-item" href="#">Financeiro</a></li>
-                <li><a class="dropdown-item" href="#">Sistema de Informação</a></li>
-                <li><a class="dropdown-item" href="#">Higienização</a></li>
-                <li><a class="dropdown-item" href="#">Reuso</a></li>
-                <li><a class="dropdown-item" href="#">Recepção</a></li>
-                <li><a class="dropdown-item" href="#">Medicina</a></li>
-                <li><a class="dropdown-item" href="#">Contabilidade</a></li>
-                <li><a class="dropdown-item" href="#">Administração</a></li>
-                <li><a class="dropdown-item" href="#">Tasy</a></li>
-                <li><a class="dropdown-item" href="#">Qualiex</a></li>
-                <li><a class="dropdown-item" href="#">Neovero</a></li>
-                <li><a class="dropdown-item" href="#">Weknow</a></li>
-
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="index.php">Sair</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+   <? include "config/navegacao.php" ?>
   </header>
 
   <main>

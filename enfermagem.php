@@ -1,63 +1,18 @@
 <?php include "config/cabecalho.php" ?>
 <link rel="stylesheet" href="css/style_pag_interna.css">
 
+<?php
+$bd = new SQLite3("config/materiais.db");
+
+// Consulta os materiais no banco de dados
+$sql = "SELECT * FROM materiais";
+$materiais = $bd->query($sql);
+?>
+
 <body>
 
   <div>
-    <nav class="navbar navbar-expand-lg bg-body-primary">
-      <div class="container-fluid">
-        <a href="home.php"><img class="logo" src="/img/csb_completo.svg" alt="" /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavDropdown"
-          aria-controls="navbarNavDropdown"
-          aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/home.php">Inicio</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Cursos externos</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Categorias
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="enfermagem.php">Enfermagem</a></li>
-                <li><a class="dropdown-item" href="">Faturamento</a></li>
-                <li><a class="dropdown-item" href="#">Financeiro</a></li>
-                <li>
-                  <a class="dropdown-item" href="#">Sistema de Informação</a>
-                </li>
-                <li><a class="dropdown-item" href="#">Higienicação</a></li>
-                <li><a class="dropdown-item" href="#">Reuso</a></li>
-                <li><a class="dropdown-item" href="#">Recepção</a></li>
-                <li><a class="dropdown-item" href="#">Médicina</a></li>
-                <li><a class="dropdown-item" href="#">Contabiidade</a></li>
-                <li><a class="dropdown-item" href="#">Administração</a></li>
-                <li><a class="dropdown-item" href="#">Tasy</a></li>
-                <li><a class="dropdown-item" href="#">Qualiex</a></li>
-                <li><a class="dropdown-item" href="#">Neovero</a></li>
-                <li><a class="dropdown-item" href="#">Weknow</a></li>
-
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <?php include "config/navegacao.php" ?>
   </div>
 
   <header>
@@ -66,113 +21,73 @@
   </header>
 
   <section class="material-cards">
-    <!-- Card para Vídeo -->
-    <div class="card">
-      <h2>Introdução ao Treinamento</h2>
-      <video controls class="media">
-        <source src="videos/introducao.mp4" type="video/mp4">
-        Seu navegador não suporta este vídeo.
-      </video>
-      <div class="card-buttons">
-        <a href="videos/introducao.mp4" download class="btn">Baixar Vídeo</a>
-        <button class="btn">Assistir</button>
+    <?php while ($material = $materiais->fetchArray()): ?>
+      <div class="card">
+        <h2><?= htmlspecialchars($material["titulo"]) ?></h2>
+        <!-- Determina o ícone baseado no tipo do material -->
+        <img 
+          src="<?php 
+            if ($material["tipo"] == "pdf") {
+              echo "img/icons/pdf.png";
+            } elseif ($material["tipo"] == "video") {
+              echo "img/icons/video.png";
+            } else {
+              echo "img/icons/img.png";
+            }
+          ?>" 
+          alt="Ícone do Material" 
+          class="media" />
+        <div class="card-buttons">
+          <a href="<?= htmlspecialchars($material["arquivo"]) ?>" download class="btn">Baixar</a>
+          <?php if ($material["tipo"] === "pdf"): ?>
+            <button onclick="abrirModalPDF('<?= htmlspecialchars($material['arquivo']) ?>')" class="btn">Ler PDF</button>
+          <?php elseif ($material["tipo"] === "video"): ?>
+            <button onclick="assistirVideo('<?= htmlspecialchars($material['arquivo']) ?>')" class="btn">Assistir</button>
+          <?php endif; ?>
+        </div>
       </div>
-    </div>
-
-    <!-- Card para PDF -->
-    <div class="card">
-      <h2>INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE</h2>
-      <img src="/img/pdf-file.png" type="application/pdf" class="media" />
-      <div class="card-buttons">
-        <a href="pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf" download class="btn">Baixar PDF</a>
-        <button onclick="abrirModalPDF('pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf')" class="btn">Ler PDF</button>
-      </div>
-    </div>
-    <div class="card">
-      <h2>INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE</h2>
-      <img src="../img/pdf-file.png" type="application/pdf" class="media" />
-      <div class="card-buttons">
-        <a href="pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf" download class="btn">Baixar PDF</a>
-        <button onclick="abrirModalPDF('pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf')" class="btn">Ler PDF</button>
-      </div>
-    </div>
-    <div class="card">
-      <h2>INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE</h2>
-      <img src="../img/pdf-file.png" type="application/pdf" class="media" />
-      <div class="card-buttons">
-        <a href="pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf" download class="btn">Baixar PDF</a>
-        <button onclick="abrirModalPDF('pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf')" class="btn">Ler PDF</button>
-      </div>
-    </div>
-    <div class="card">
-      <h2>INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE</h2>
-      <img src="../img/pdf-file.png" type="application/pdf" class="media" />
-      <div class="card-buttons">
-        <a href="pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf" download class="btn">Baixar PDF</a>
-        <button onclick="abrirModalPDF('pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf')" class="btn">Ler PDF</button>
-      </div>
-    </div>
-    <div class="card">
-      <h2>INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE</h2>
-      <img src="../img/pdf-file.png" type="application/pdf" class="media" />
-      <div class="card-buttons">
-        <a href="pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf" download class="btn">Baixar PDF</a>
-        <button onclick="abrirModalPDF('pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf')" class="btn">Ler PDF</button>
-      </div>
-    </div>
-    <div class="card">
-      <h2>INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE</h2>
-      <img src="../img/pdf-file.png" type="application/pdf" class="media" />
-      <div class="card-buttons">
-        <a href="pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf" download class="btn">Baixar PDF</a>
-        <button onclick="abrirModalPDF('pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf')" class="btn">Ler PDF</button>
-      </div>
-    </div>
-
-
-
-
-
-    <div class="card">
-      <h2></h2>
-      <embed src="" type="application/pdf" class="media" />
-      <div class="card-buttons">
-        <a href="" download class="btn">Baixar PDF</a>
-        <button onclick="abrirModalPDF('')" class="btn">Ler PDF</button>
-      </div>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Modals -->
-
-    <!-- Modal1 -->
-    <div id="pdfModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="fecharModal()">&times;</span>
-        <iframe id="pdfViewer" src="pdfs/enfermagem/INQUÉRITO SOROLÓGICO PARA SARS-COV-2 E DETECÇÃO VIRAL EM CRIANÇAS EM HEMODIÁLISE.pdf" frameborder="0"></iframe>
-      </div>
-    </div>
-
-    <!-- Modal2 -->
-    <div id="pdfModal" class="modal">
-      <div class="modal-content">
-        <span class="close" onclick="fecharModal()">&times;</span>
-        <iframe id="pdfViewer" src="" frameborder="0"></iframe>
-      </div>
-    </div>
-
+    <?php endwhile; ?>
   </section>
 
-<?php include "config/footer.php"?>
+  <!-- Modal -->
+  <div id="pdfModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+    </div>
+  </div>
+
+  <?php include "config/footer.php" ?>
 </body>
+
+<script>
+  // Abre o modal para PDFs
+  function abrirModalPDF(caminho) {
+    document.getElementById('pdfViewer').src = caminho;
+    document.getElementById('pdfModal').style.display = 'block';
+  }
+
+  // Abre o modal para vídeos
+  function assistirVideo(caminho) {
+    const modalContent = document.querySelector('#pdfModal .modal-content');
+    modalContent.innerHTML = `
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <video controls autoplay class="media-player">
+        <source src="${caminho}" type="video/mp4">
+        Seu navegador não suporta este vídeo.
+      </video>`;
+    document.getElementById('pdfModal').style.display = 'block';
+  }
+
+  // Fecha o modal
+  function fecharModal() {
+    document.getElementById('pdfModal').style.display = 'none';
+    document.getElementById('pdfViewer').src = ""; // Reseta o iframe
+    const modalContent = document.querySelector('#pdfModal .modal-content');
+    modalContent.innerHTML = `
+      <span class="close" onclick="fecharModal()">&times;</span>
+      <iframe id="pdfViewer" src="" frameborder="0"></iframe>`;
+  }
+</script>
 
 </html>
