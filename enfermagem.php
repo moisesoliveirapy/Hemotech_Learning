@@ -1,12 +1,14 @@
+
+
 <?php include "config/cabecalho.php" ?>
 <link rel="stylesheet" href="css/style_pag_interna.css">
 
 <?php
-$bd = new SQLite3("config/materiais.db");
+session_start();
+require "repository/materiaisRepositoryPDO.php";
 
-// Consulta os materiais no banco de dados
-$sql = "SELECT * FROM materiais where categoria = 'Enfermagem'";
-$materiais = $bd->query($sql);
+$materaisRepository = new MateriaisRepositoryPDO();
+$materiais = $materaisRepository->listarTodos("Enfermagem");
 ?>
 
 <body>
@@ -17,15 +19,15 @@ $materiais = $bd->query($sql);
   </header>
 
   <section class="material-cards">
-    <?php while ($material = $materiais->fetchArray()): ?>
+    <?php foreach($materiais as $material): ?>
       <div class="card">
-        <h2><?= htmlspecialchars($material["titulo"]) ?></h2>
+        <h2><?= htmlspecialchars($material->titulo) ?></h2>
         <!-- Determina o ícone baseado no tipo do material -->
         <img 
           src="<?php 
-            if ($material["tipo"] == "pdf") {
+            if ($material->tipo == "pdf") {
               echo "img/icons/pdf.png";
-            } elseif ($material["tipo"] == "video") {
+            } elseif ($material->tipo == "video") {
               echo "img/icons/video.png";
             } else {
               echo "img/icons/img.png";
@@ -34,15 +36,15 @@ $materiais = $bd->query($sql);
           alt="Ícone do Material" 
           class="media" />
         <div class="card-buttons">
-          <a href="<?= htmlspecialchars($material["arquivo"]) ?>" download class="btn">Baixar</a>
-          <?php if ($material["tipo"] === "pdf"): ?>
-            <button onclick="abrirModalPDF('<?= htmlspecialchars($material['arquivo']) ?>')" class="btn">Ler PDF</button>
-          <?php elseif ($material["tipo"] === "video"): ?>
-            <button onclick="assistirVideo('<?= htmlspecialchars($material['arquivo']) ?>')" class="btn">Assistir</button>
+          <a href="<?= htmlspecialchars($material->arquivo) ?>" download class="btn">Baixar</a>
+          <?php if ($material->tipo === "pdf"): ?>
+            <button onclick="abrirModalPDF('<?= htmlspecialchars($material->arquivo) ?>')" class="btn">Ler PDF</button>
+          <?php elseif ($material->tipo === "video"): ?>
+            <button onclick="assistirVideo('<?= htmlspecialchars($material->arquivo) ?>')" class="btn">Assistir</button>
           <?php endif; ?>
         </div>
       </div>
-    <?php endwhile; ?>
+    <?php endforeach; ?>
   </section>
 
   <!-- Modal -->
