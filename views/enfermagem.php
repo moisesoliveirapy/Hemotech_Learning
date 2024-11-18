@@ -4,8 +4,9 @@
 <link rel="stylesheet" href="css/style_pag_interna.css">
 
 <?php
-session_start();
-require "repository/materiaisRepositoryPDO.php";
+
+require_once "repository/materiaisRepositoryPDO.php";
+
 
 $materaisRepository = new MateriaisRepositoryPDO();
 $materiais = $materaisRepository->listarTodos("Enfermagem");

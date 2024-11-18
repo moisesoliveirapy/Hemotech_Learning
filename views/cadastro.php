@@ -1,7 +1,7 @@
 <?php include "config/cabecalho.php"; ?>
 
 <body>
-    <form action="config/inserirmateriais.php" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
 
         <!-- Título -->
         <label for="titulo" class="form-label">Título</label>
@@ -39,11 +39,16 @@
             <option value="Weknow">Weknow</option>
         </select>
 
-        <!-- Upload via URL -->
         <div class="mb-3">
+            <label for="pdf" class="form-label">Upload de Arquivo</label>
+            <input class="form-control" type="file" id="files" name="files">
+        </div>
+        <!-- Upload via URL -->
+       <!--  <div class="mb-3">
             <label for="arquivo" class="form-label">Upload via URL</label>
             <input class="form-control" type="text" id="arquivo" name="arquivo" placeholder="https://example.com/meuarquivo.pdf" required>
-        </div>
+        </div> -->
+        
 
         <!-- Botão de Envio -->
         <button type="submit" class="btn btn-primary">Enviar</button>

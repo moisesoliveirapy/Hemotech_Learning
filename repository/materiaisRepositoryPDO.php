@@ -1,6 +1,6 @@
 <?php
 
-require "conexao.php";
+require_once "repository/conexao.php";
 
 class MateriaisRepositoryPDO{
 
@@ -19,7 +19,6 @@ class MateriaisRepositoryPDO{
         // Consulta os materiais no banco de dados
         $sql = "SELECT * FROM materiais where categoria = '$categoria'";
         $materiais = $this->conexao->query($sql);
-        if(!$materiais) return false;
         while ($material = $materiais->fetchObject()) {
             array_push($materiaisLista, $material);
         }
