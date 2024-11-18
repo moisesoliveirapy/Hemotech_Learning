@@ -22,7 +22,7 @@
       const pdfViewer = document.getElementById("pdfViewer");
 
       pdfViewer.src = url; // Define o PDF no iframe
-      modal.style.display = "block"; // Exibe o modal
+      modal.style.display = "block"; // Exibe o m odal
     }
 
     function fecharModal() {
